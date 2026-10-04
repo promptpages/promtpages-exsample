@@ -24,13 +24,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
         run: npm run build
+
+      - name: List dist output
+        run: ls -la dist && cat dist/index.html | head -30
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
