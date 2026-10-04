@@ -1,0 +1,8 @@
+{
+  "name": "SiteStat",
+  "fields": {
+    "key": { "type": "string", "required": true },
+    "value": { "type": "number", "required": true },
+    "updatedAt": { "type": "datetime" }
+  }
+}

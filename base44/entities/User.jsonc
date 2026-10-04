@@ -1,0 +1,8 @@
+{
+  "name": "User",
+  "fields": {
+    "email": { "type": "string", "required": true },
+    "name": { "type": "string" },
+    "role": { "type": "string", "default": "user" }
+  }
+}
