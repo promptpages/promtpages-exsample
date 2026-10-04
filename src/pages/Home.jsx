@@ -108,6 +108,9 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 font-mono text-[11px] tracking-widest text-steel/70">
+              More examples coming soon.
+            </p>
           </div>
         </div>
       </main>
