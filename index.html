@@ -1,16 +1,184 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PromptPages — Example Sites</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/promtpages-exsample/assets/index-DFDaAqrq.js"></script>
-    <link rel="stylesheet" crossorigin href="/promtpages-exsample/assets/index-Iixc70Ag.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PromptPages — Example Sites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --carbon:#111827; --mint:#00F5A0; --steel:#6B7280; --line:#E5E7EB; --font-heading:'Inter Tight',system-ui,sans-serif; --font-mono:'JetBrains Mono',monospace; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Inter,system-ui,sans-serif; color:var(--carbon); background:#fff; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .mono { font-family:var(--font-mono); }
+  .heading { font-family:var(--font-heading); }
+  .mint { color:var(--mint); }
+  .steel { color:var(--steel); }
+  .container { max-width:1400px; margin:0 auto; padding:0 1.25rem; }
+  @media(min-width:768px){ .container { padding:0 2.5rem; } }
+  header { border-bottom:1px solid var(--line); height:4rem; display:flex; align-items:center; }
+  header .inner { width:100%; display:flex; justify-content:space-between; align-items:center; }
+  .logo { font-family:var(--font-mono); font-weight:700; font-size:15px; letter-spacing:-0.02em; }
+  main { min-height:calc(100vh - 8rem); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:4rem 1.25rem; }
+  h1 { font-family:var(--font-heading); font-weight:700; font-size:clamp(2.5rem,6vw,3.75rem); letter-spacing:-0.03em; line-height:0.95; text-align:center; }
+  .sub { margin-top:1rem; color:var(--steel); text-align:center; font-size:1.05rem; max-width:36rem; line-height:1.6; }
+  .search-wrap { margin-top:2.5rem; width:100%; max-width:42rem; }
+  .search-row { display:flex; align-items:center; gap:0.75rem; border-bottom:2px solid var(--carbon); padding-bottom:0.75rem; }
+  .search-row input { flex:1; min-width:0; border:0; outline:none; font-family:var(--font-heading); font-weight:700; font-size:clamp(1.1rem,3vw,1.75rem); letter-spacing:-0.02em; background:transparent; }
+  .search-row input::placeholder { color:#6b728066; }
+  .btn { display:inline-flex; align-items:center; gap:0.35rem; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; padding:0.65rem 1rem; border:0; cursor:pointer; transition:background .15s,color .15s; }
+  .btn-mint { background:var(--mint); color:var(--carbon); }
+  .btn-carbon { background:var(--carbon); color:#fff; }
+  .btn-carbon:hover { background:var(--mint); color:var(--carbon); }
+  .btn-outline { background:transparent; border:1px solid var(--line); color:var(--carbon); }
+  .btn-outline:hover { border-color:var(--carbon); }
+  .matches { margin-top:1rem; display:grid; gap:0.5rem; }
+  @media(min-width:640px){ .matches { grid-template-columns:1fr 1fr; } }
+  .match { display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); padding:0.75rem 1rem; font-family:var(--font-mono); font-size:12px; letter-spacing:0.02em; transition:all .15s; }
+  .match:hover { border-color:var(--carbon); background:var(--carbon); color:#fff; }
+  .all { margin-top:3rem; border-top:1px solid var(--line); padding-top:1.5rem; width:100%; max-width:42rem; }
+  .all-label { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--steel); margin-bottom:0.75rem; }
+  .all-list { display:flex; flex-wrap:wrap; gap:0.5rem 1rem; }
+  .all-list a { font-family:var(--font-mono); font-size:11px; letter-spacing:0.02em; color:var(--steel); }
+  .all-list a:hover { color:var(--mint); }
+  footer { border-top:1px solid var(--line); padding:1rem 0; }
+  footer .inner { display:flex; flex-direction:column; gap:0.5rem; align-items:center; justify-content:space-between; }
+  @media(min-width:640px){ footer .inner { flex-direction:row; } }
+  footer p { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--steel); }
+  .ex-header { border-bottom:1px solid var(--line); height:3.5rem; display:flex; align-items:center; }
+  .ex-hero { padding:3rem 0 4rem; }
+  .ex-hero h1 { text-align:left; font-size:clamp(2rem,5vw,3.5rem); }
+  .ex-tag { font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; color:var(--mint); }
+  .ex-tagline { margin-top:1rem; color:var(--steel); font-size:1.15rem; line-height:1.6; max-width:36rem; }
+  .ex-actions { margin-top:2rem; display:flex; flex-wrap:wrap; gap:0.75rem; }
+  .ex-cards { margin-top:3rem; display:grid; gap:1rem; max-width:48rem; }
+  @media(min-width:640px){ .ex-cards { grid-template-columns:repeat(3,1fr); } }
+  .ex-card { border:1px solid var(--line); padding:1rem; }
+  .ex-card .lbl { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--steel); }
+  .ex-card .val { margin-top:0.5rem; font-size:0.9rem; font-weight:500; }
+  section.block { padding:4rem 0; border-top:1px solid var(--line); }
+  section.block h2 { font-family:var(--font-heading); font-weight:700; font-size:1.75rem; margin-top:0.5rem; }
+  .svc-grid { margin-top:2rem; display:grid; gap:1rem; }
+  @media(min-width:640px){ .svc-grid { grid-template-columns:1fr 1fr; } }
+  @media(min-width:1024px){ .svc-grid { grid-template-columns:1fr 1fr 1fr; } }
+  .svc { border:1px solid var(--line); padding:1.25rem; }
+  .svc-top { display:flex; justify-content:space-between; gap:0.5rem; font-family:var(--font-mono); font-size:13px; }
+  .svc-price { color:var(--mint); white-space:nowrap; }
+  .svc-desc { margin-top:0.5rem; font-size:0.875rem; color:var(--steel); line-height:1.5; }
+  .features { display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1rem; }
+  .features span { font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; border:1px solid var(--line); padding:0.35rem 0.75rem; color:var(--steel); }
+  .reviews { margin-top:2rem; display:grid; gap:1.5rem; }
+  @media(min-width:768px){ .reviews { grid-template-columns:1fr 1fr; } }
+  .review { border:1px solid var(--line); padding:1.5rem; }
+  .stars { color:var(--mint); margin-bottom:0.75rem; }
+  .review p { font-size:0.95rem; line-height:1.6; }
+  .review footer { margin-top:1rem; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; color:var(--steel); }
+  .cta { background:var(--carbon); color:#fff; padding:3rem 0; }
+  .cta .inner { display:flex; flex-direction:column; gap:1.5rem; }
+  @media(min-width:768px){ .cta .inner { flex-direction:row; align-items:center; justify-content:space-between; } }
+  .hidden { display:none !important; }
+  .back { font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; color:var(--steel); }
+  .back:hover { color:var(--carbon); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const industries = [
+  { type:"lawn", label:"Lawn Care", name:"GreenBlade Lawn Co.", tagline:"Precision lawn care, week after week.", phone:"(555) 010-2233", email:"hello@greenblade.co", address:"482 Maple Ridge Road", city:"Cedar Falls, IA 50613", hours:"Mon–Sat · 7:00am – 6:00pm",
+    services:[{name:"Weekly Mowing",price:"$35",unit:"/visit",desc:"Clean cuts, crisp edges, and a tidy blow-off every time."},{name:"Lawn Aeration",price:"$120",unit:"one-time",desc:"Relieve compaction and let your roots breathe."},{name:"Fertilization Program",price:"$60",unit:"/month",desc:"Seasonal feeding schedule tailored to your soil."}],
+    features:["Licensed & insured","Same crew every week","No contracts","Free estimate"],
+    testimonials:[{name:"Dana R.",role:"Cedar Falls",text:"Best lawn on the block. The edges are always perfect."},{name:"Marcus T.",role:"Cedar Falls",text:"Showed up on time, every week, all season."}] },
+  { type:"bakery", label:"Bakery", name:"Flour & Stone Bakehouse", tagline:"Sourdough, pastries, and bread baked before sunrise.", phone:"(555) 014-8810", email:"orders@flourandstone.co", address:"19 Mill Street", city:"Asheville, NC 28801", hours:"Wed–Sun · 6:00am – 3:00pm",
+    services:[{name:"Sourdough Loaf",price:"$8",unit:"each",desc:"Naturally leavened, 24-hour ferment."},{name:"Pastry Box",price:"$24",unit:"box of 6",desc:"Croissants, danishes, seasonal specialties."},{name:"Custom Cake",price:"$65",unit:"starting at",desc:"Celebration cakes, 48 hours notice."}],
+    features:["Baked fresh daily","Organic flour","Local ingredients"],
+    testimonials:[{name:"Elena M.",role:"Asheville",text:"Their sourdough is the best in town."},{name:"James K.",role:"Asheville",text:"Birthday cake looked amazing and tasted even better."}] },
+  { type:"plumber", label:"Plumbing", name:"ClearFlow Plumbing", tagline:"Fast, honest plumbing — nights and weekends included.", phone:"(555) 019-4400", email:"dispatch@clearflow.pl", address:"210 Industrial Blvd", city:"Columbus, OH 43215", hours:"24/7 emergency · Office 8am–6pm",
+    services:[{name:"Emergency Call-Out",price:"$95",unit:"dispatch",desc:"Arrive within 60 minutes."},{name:"Drain Clearing",price:"$149",unit:"starting at",desc:"Camera inspection and hydro-jetting."},{name:"Water Heater Install",price:"$899",unit:"starting at",desc:"Tank and tankless, same-day service."}],
+    features:["Licensed & bonded","Upfront pricing","1-year warranty"],
+    testimonials:[{name:"Priya S.",role:"Columbus",text:"Came at 11pm for a burst pipe. Fixed it fast."},{name:"Tom H.",role:"Columbus",text:"Honest — told me I only needed a $40 part."}] },
+  { type:"food-truck", label:"Food Truck", name:"Smoke & Ember BBQ", tagline:"Low and slow barbecue, rolled to your neighborhood.", phone:"(555) 022-7711", email:"hello@smokeember.com", address:"Rolling · Check schedule", city:"Austin, TX", hours:"Thu–Sun · 11:00am – 8:00pm",
+    services:[{name:"Brisket Plate",price:"$16",desc:"12-hour smoked brisket, two sides."},{name:"Pulled Pork Sandwich",price:"$11",desc:"House sauce, slaw, toasted bun."},{name:"Family Pack",price:"$55",unit:"feeds 4",desc:"Meat, sides, bread, and sauce."}],
+    features:["Locally sourced","Catering available","Gluten-free options"],
+    testimonials:[{name:"Chris L.",role:"Austin",text:"Best brisket I have had from a truck."},{name:"Nina P.",role:"Austin",text:"Booked them for office lunch — everyone was happy."}] },
+  { type:"auto-repair", label:"Auto Repair", name:"Torque & Tread Auto", tagline:"Honest diagnostics. Fair repairs. Cars that last.", phone:"(555) 028-3300", email:"service@torquetread.com", address:"880 Garage Row", city:"Denver, CO 80205", hours:"Mon–Fri · 7:30am – 5:30pm",
+    services:[{name:"Oil Change",price:"$49",unit:"starting at",desc:"Synthetic options, multi-point check."},{name:"Brake Service",price:"$189",unit:"axle",desc:"Pads, rotors inspected, lifetime pad warranty."},{name:"Check Engine",price:"$89",unit:"diagnosis",desc:"Full scan, road test, written estimate."}],
+    features:["ASE certified","Digital inspections","Shuttle service"],
+    testimonials:[{name:"Kevin R.",role:"Denver",text:"No upselling. They showed me the photos."},{name:"Amy W.",role:"Denver",text:"Had my car back same day. Fair price."}] },
+  { type:"cleaning", label:"Cleaning", name:"SparkLine Home Clean", tagline:"Reliable home cleaning that actually shows up.", phone:"(555) 031-5500", email:"book@sparkline.clean", address:"Serving metro area", city:"Portland, OR", hours:"Mon–Sat · 8:00am – 6:00pm",
+    services:[{name:"Standard Clean",price:"$120",unit:"starting at",desc:"Kitchen, baths, floors, dusting."},{name:"Deep Clean",price:"$220",unit:"starting at",desc:"Baseboards, appliances, detail work."},{name:"Move-Out",price:"$280",unit:"starting at",desc:"Empty home clean."}],
+    features:["Background-checked","Eco-friendly","Satisfaction guarantee"],
+    testimonials:[{name:"Sofia G.",role:"Portland",text:"Consistent and careful. House always smells clean."},{name:"David N.",role:"Portland",text:"Booking is easy and they never no-show."}] },
+  { type:"barber", label:"Barber", name:"Corner Chair Barbers", tagline:"Classic cuts. Sharp fades. No appointment needed.", phone:"(555) 041-2200", email:"hello@cornerchair.barber", address:"14 Main Street", city:"Nashville, TN 37203", hours:"Tue–Sat · 9:00am – 7:00pm",
+    services:[{name:"Haircut",price:"$35",desc:"Consultation, cut, hot towel, style."},{name:"Skin Fade",price:"$40",desc:"Crisp fade, clean neckline."},{name:"Cut + Beard",price:"$50",desc:"Full service."}],
+    features:["Walk-ins welcome","Hot towel service","Kids cuts"],
+    testimonials:[{name:"Marcus J.",role:"Nashville",text:"Best fade in town."},{name:"Andre P.",role:"Nashville",text:"Good vibes, good cuts, fair prices."}] },
+  { type:"electrician", label:"Electrician", name:"VoltRight Electric", tagline:"Safe, code-compliant electrical work.", phone:"(555) 055-9000", email:"jobs@voltright.elec", address:"Licensed · Bonded · Insured", city:"Phoenix, AZ", hours:"Mon–Fri · 7:00am – 5:00pm · 24/7 emergency",
+    services:[{name:"Panel Upgrade",price:"$1,800",unit:"starting at",desc:"100A to 200A upgrades."},{name:"Outlet Install",price:"$125",unit:"each",desc:"New circuits, GFCI, USB outlets."},{name:"EV Charger",price:"$650",unit:"starting at",desc:"Level 2 install."}],
+    features:["Licensed master electrician","Permit & inspection","Warranty on labor"],
+    testimonials:[{name:"Linda C.",role:"Phoenix",text:"Upgraded our panel without drama."},{name:"Rob F.",role:"Phoenix",text:"Installed EV charger in one afternoon."}] },
+  { type:"coffee-shop", label:"Coffee Shop", name:"Northbound Coffee", tagline:"Single-origin espresso and slow mornings.", phone:"(555) 062-1100", email:"hi@northbound.coffee", address:"88 River Avenue", city:"Seattle, WA 98101", hours:"Daily · 6:30am – 4:00pm",
+    services:[{name:"Espresso",price:"$3.50",desc:"Single origin, dialed in daily."},{name:"Pour Over",price:"$5",desc:"V60 or Kalita."},{name:"Bags to Go",price:"$18",unit:"12oz",desc:"Whole bean, roasted weekly."}],
+    features:["Direct trade beans","Free Wi-Fi","Oat & almond milk"],
+    testimonials:[{name:"Helen Y.",role:"Seattle",text:"My daily stop. Consistent espresso."},{name:"Sam B.",role:"Seattle",text:"Best pour-over in the neighborhood."}] },
+  { type:"hvac", label:"HVAC", name:"ClimateLine Comfort", tagline:"Heating and cooling that keeps your home comfortable.", phone:"(555) 077-6600", email:"service@climateline.hvac", address:"Serving greater metro", city:"Atlanta, GA", hours:"Mon–Sat · 7:00am – 7:00pm",
+    services:[{name:"AC Tune-Up",price:"$89",desc:"Seasonal maintenance."},{name:"Furnace Repair",price:"$149",unit:"diagnosis",desc:"Same-day when possible."},{name:"New System",price:"$4,500",unit:"starting at",desc:"High-efficiency options."}],
+    features:["NATE certified","Financing available","24/7 emergency"],
+    testimonials:[{name:"Grace T.",role:"Atlanta",text:"Fixed our AC in July within hours."},{name:"Paul M.",role:"Atlanta",text:"Honest about what we needed."}] }
+];
+const getIndustry = (type) => industries.find((i) => i.type === type);
+
+function route(){
+  const hash = location.hash.replace(/^#\/?/, '') || '';
+  const parts = hash.split('/').filter(Boolean);
+  if(parts[0]==='ex' && parts[1]) return renderExample(parts[1]);
+  return renderHome();
+}
+
+function renderHome(){
+  const app = document.getElementById('app');
+  app.innerHTML = `<header><div class="container inner"><a href="#/" class="logo">promtpages<span class="mint">.app</span></a><span class="mono steel" style="font-size:10px;letter-spacing:0.1em">$5 / PAGE</span></div></header>
+  <main><h1 class="heading">SEE AN <span class="mint">EXAMPLE</span>.</h1>
+  <p class="sub">Type your industry to preview a finished one-page site — built on the same $5/page system.</p>
+  <div class="search-wrap"><div class="search-row">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+  <input id="q" placeholder="lawn, bakery, plumber…" autocomplete="off" autofocus/>
+  <button id="go" class="btn btn-mint hidden">LAUNCH PREVIEW →</button></div>
+  <div id="matches" class="matches"></div>
+  <div class="all"><div class="all-label">ALL EXAMPLES</div><div class="all-list" id="all"></div></div></div></main>
+  <footer><div class="container inner"><p>© ${new Date().getFullYear()} PROMTPAGES.APP</p><p>BUILT ON THE $5/PAGE SYSTEM</p></div></footer>`;
+  const all = document.getElementById('all');
+  industries.forEach(i => { const a=document.createElement('a'); a.href='#/ex/'+i.type; a.textContent=i.label; all.appendChild(a); });
+  const input=document.getElementById('q'); const go=document.getElementById('go'); const matchesEl=document.getElementById('matches');
+  function update(){
+    const q=input.value.trim().toLowerCase(); matchesEl.innerHTML='';
+    if(!q){ go.classList.add('hidden'); return; }
+    const matches=industries.filter(i=>i.label.toLowerCase().includes(q)||i.type.includes(q)||i.name.toLowerCase().includes(q));
+    if(matches.length){ go.classList.remove('hidden'); go.onclick=()=>location.hash='#/ex/'+matches[0].type;
+      matches.slice(0,6).forEach(m=>{ const a=document.createElement('a'); a.href='#/ex/'+m.type; a.className='match'; a.innerHTML='<span>'+m.label+'</span><span>→</span>'; matchesEl.appendChild(a); });
+    } else { go.classList.add('hidden'); matchesEl.innerHTML='<p class="mono steel" style="font-size:12px">No exact match — try one of the industries below.</p>'; }
+  }
+  input.addEventListener('input', update);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter'){ const q=input.value.trim().toLowerCase(); const m=industries.find(i=>i.label.toLowerCase().includes(q)||i.type.includes(q)||i.name.toLowerCase().includes(q)); if(m) location.hash='#/ex/'+m.type; }});
+}
+
+function renderExample(type){
+  const industry=getIndustry(type); const app=document.getElementById('app');
+  if(!industry){ app.innerHTML=`<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem"><span class="mono steel" style="font-size:11px;letter-spacing:0.1em">404 — NO EXAMPLE</span><h1 class="heading" style="font-size:1.75rem;margin-top:0.75rem">Example not found</h1><a href="#/" class="btn btn-carbon" style="margin-top:2rem">← BACK HOME</a></div>`; return; }
+  const services=industry.services||[]; const testimonials=industry.testimonials||[]; const features=industry.features||[];
+  app.innerHTML=`<div class="ex-header"><div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%"><a href="#/" class="logo">promtpages<span class="mint">.app</span></a><a href="#/" class="back">← ALL EXAMPLES</a></div></div>
+  <section class="ex-hero"><div class="container"><div class="ex-tag">${(industry.label||'').toUpperCase()}</div><h1 class="heading">${industry.name}</h1><p class="ex-tagline">${industry.tagline||''}</p>
+  <div class="ex-actions">${industry.phone?`<a class="btn btn-carbon" href="tel:${industry.phone}">☎ ${industry.phone}</a>`:''}${industry.email?`<a class="btn btn-outline" href="mailto:${industry.email}">EMAIL</a>`:''}</div>
+  <div class="ex-cards">${industry.address?`<div class="ex-card"><div class="lbl">📍 ADDRESS</div><div class="val">${industry.address}${industry.city?'<br/>'+industry.city:''}</div></div>`:''}${industry.hours?`<div class="ex-card"><div class="lbl">🕐 HOURS</div><div class="val">${industry.hours}</div></div>`:''}${industry.phone?`<div class="ex-card"><div class="lbl">☎ PHONE</div><div class="val">${industry.phone}</div></div>`:''}</div></div></section>
+  ${services.length?`<section class="block"><div class="container"><div class="mono steel" style="font-size:11px;letter-spacing:0.1em">SERVICES</div><h2>What we offer</h2><div class="svc-grid">${services.map(s=>{const name=typeof s==='string'?s:s.name;const price=typeof s==='object'?s.price:null;const unit=typeof s==='object'?s.unit:null;const desc=typeof s==='object'?s.desc:null;return `<div class="svc"><div class="svc-top"><span>${name}</span>${price?`<span class="svc-price">${price}${unit?' '+unit:''}</span>`:''}</div>${desc?`<p class="svc-desc">${desc}</p>`:''}</div>`;}).join('')}</div></div></section>`:''}
+  ${features.length?`<section class="block" style="padding-top:0;border-top:0"><div class="container"><div class="features">${features.map(f=>`<span>${f}</span>`).join('')}</div></div></section>`:''}
+  ${testimonials.length?`<section class="block"><div class="container"><div class="mono steel" style="font-size:11px;letter-spacing:0.1em">REVIEWS</div><h2>What clients say</h2><div class="reviews">${testimonials.map(t=>`<blockquote class="review"><div class="stars">★★★★★</div><p>"${t.text}"</p><footer>${t.name}${t.role?' · '+t.role:''}</footer></blockquote>`).join('')}</div></div></section>`:''}
+  <section class="cta"><div class="container inner"><div><h3 class="heading" style="font-size:1.25rem">Ready to get started?</h3><p style="margin-top:0.25rem;opacity:0.7;font-size:0.9rem">Contact us today for a free quote.</p></div>${industry.phone?`<a class="btn btn-mint" href="tel:${industry.phone}">☎ CALL NOW</a>`:''}</div></section>`;
+}
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
 </html>
