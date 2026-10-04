@@ -13,62 +13,109 @@ export default function Home() {
     return industries.filter(
       (i) =>
         i.label.toLowerCase().includes(q) ||
-        i.slug.toLowerCase().includes(q) ||
-        (i.keywords && i.keywords.some((k) => k.toLowerCase().includes(q)))
-    ).slice(0, 8);
+        i.type.includes(q) ||
+        i.name.toLowerCase().includes(q)
+    );
   }, [query]);
 
-  const handleSearch = (e) => {
+  const exact = matches.length > 0 ? matches[0] : null;
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (matches.length === 1) {
-      navigate(`/example?industry=${matches[0].slug}`);
-    } else if (query.trim()) {
-      navigate(`/example?q=${encodeURIComponent(query.trim())}`);
-    }
+    if (exact) navigate(`/ex/${exact.type}`);
   };
 
   return (
-    <div className="min-h-screen bg-void text-white flex flex-col">
-      {/* Hero */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-20 text-center">
-        <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight mb-4">
-          PromptPages
-        </h1>
-        <p className="text-lg md:text-xl text-steel max-w-xl mb-8">
-          High-converting landing pages for any industry. Built in minutes.
-        </p>
+    <div className="min-h-screen flex flex-col bg-white">
+      <header className="border-b border-line">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-10 h-16 flex items-center justify-between">
+          <Link to="/" className="font-mono text-[15px] font-bold tracking-tight">
+            promtpages<span className="text-mint">.app</span>
+          </Link>
+          <span className="font-mono text-[10px] tracking-widest text-steel">
+            $5 / PAGE
+          </span>
+        </div>
+      </header>
 
-        <form onSubmit={handleSearch} className="w-full max-w-md relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-steel" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search industries..."
-            className="w-full bg-charcoal border border-border rounded-full py-3 pl-12 pr-4 text-white placeholder:text-steel focus:outline-none focus:ring-2 focus:ring-accent"
-          />
-        </form>
+      <main className="flex-1 flex flex-col items-center justify-center px-5 md:px-10 py-16">
+        <div className="w-full max-w-2xl">
+          <h1 className="font-heading font-bold tracking-tight text-carbon leading-[0.95] text-5xl md:text-6xl text-center">
+            SEE AN <span className="text-mint">EXAMPLE</span>.
+          </h1>
+          <p className="mt-4 text-steel text-[15px] md:text-lg text-center leading-relaxed">
+            Type your industry to preview a finished one-page site — built on the same $5/page system.
+          </p>
 
-        {matches.length > 0 && (
-          <div className="mt-4 w-full max-w-md bg-charcoal border border-border rounded-xl overflow-hidden text-left">
-            {matches.map((i) => (
-              <Link
-                key={i.slug}
-                to={`/example?industry=${i.slug}`}
-                className="flex items-center justify-between px-4 py-3 hover:bg-void/50 transition-colors"
-              >
-                <span>{i.label}</span>
-                <ArrowRight className="w-4 h-4 text-steel" />
-              </Link>
-            ))}
+          <form onSubmit={onSubmit} className="mt-10 relative">
+            <div className="flex items-center gap-3 border-b-2 border-carbon pb-3">
+              <Search size={22} className="text-carbon shrink-0" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="lawn, bakery, plumber…"
+                autoFocus
+                className="min-w-0 flex-1 bg-transparent outline-none font-heading text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-carbon placeholder:text-steel/40"
+                autoComplete="off"
+              />
+              {exact && (
+                <button
+                  type="submit"
+                  className="shrink-0 inline-flex items-center gap-1.5 bg-mint text-carbon font-mono text-[11px] tracking-widest px-4 py-2.5"
+                >
+                  LAUNCH PREVIEW <ArrowRight size={14} />
+                </button>
+              )}
+            </div>
+          </form>
+
+          {query && (
+            <div className="mt-4">
+              {matches.length > 0 ? (
+                <ul className="grid sm:grid-cols-2 gap-2">
+                  {matches.slice(0, 6).map((m) => (
+                    <li key={m.type}>
+                      <Link
+                        to={`/ex/${m.type}`}
+                        className="w-full text-left flex items-center justify-between border border-line px-4 py-3 hover:border-carbon hover:bg-carbon hover:text-white transition-colors group"
+                      >
+                        <span className="font-mono text-[12px] tracking-wide">{m.label}</span>
+                        <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="font-mono text-[12px] text-steel">
+                  No exact match — try one of the industries below.
+                </p>
+              )}
+            </div>
+          )}
+
+          <div className="mt-12 border-t border-line pt-6">
+            <p className="font-mono text-[10px] tracking-widest text-steel mb-3">
+              ALL EXAMPLES
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-2">
+              {industries.map((ind) => (
+                <li key={ind.type}>
+                  <Link
+                    to={`/ex/${ind.type}`}
+                    className="font-mono text-[11px] tracking-wide text-steel hover:text-mint transition-colors"
+                  >
+                    {ind.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
-      </section>
+        </div>
+      </main>
 
-      <footer className="py-8 text-center border-t border-border">
-        <div className="space-y-1">
+      <footer className="border-t border-line">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-10 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="font-mono text-[10px] tracking-widest text-steel">
-            PROMPTPAGES.APP
+            © {new Date().getFullYear()} PROMTPAGES.APP
           </p>
           <p className="font-mono text-[10px] tracking-widest text-steel">
             BUILT ON THE $5/PAGE SYSTEM
