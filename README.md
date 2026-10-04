@@ -45,4 +45,10 @@ base44 dev --remote
 
 ## Publish Your Changes
 
-After pushing your changes to git, open the Base44 dashboard and publish the app.
+After pushing your changes to git, open the Base44 dashboard and publish the app:
+
+```bash
+# From the Base44 Builder UI, or via CLI if available
+```
+
+Changes pushed to this repo are picked up by the Base44 Builder automatically.
