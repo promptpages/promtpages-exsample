@@ -1,7 +1,12 @@
 import { createClient } from '@base44/sdk';
+import { appParams } from '@/lib/app-params';
 
-// Create a client with authentication required for production use
+const { appId, token, functionsVersion, appBaseUrl } = appParams;
+
 export const base44 = createClient({
-  appId: import.meta.env.VITE_BASE44_APP_ID,
-  requiresAuth: true
+  appId,
+  token,
+  functionsVersion,
+  serverUrl: '',
+  appBaseUrl
 });
